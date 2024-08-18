@@ -62,7 +62,7 @@
 }
 
 .addTask {
-  margin-top: 1rem;
+  margin-bottom: 1rem;
   display: flex;
   gap: 0.5rem;
 }
@@ -114,7 +114,7 @@
 
 .checklist li.done {
   text-decoration: line-through;
-  background-color: green;
+  background-color: #4caf50; /* Verde claro */
 }
 
 .checklist li.animating {

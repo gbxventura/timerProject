@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import styles from './Timer.module.css';
-import Cookies from 'js-cookie';
 
 export default function Timer() {
   const [time, setTime] = useState(0);
@@ -19,19 +18,6 @@ export default function Timer() {
     }
     return () => clearInterval(timer);
   }, [isRunning, time]);
-
-  // Carregar tarefas dos cookies
-  useEffect(() => {
-    const savedChecklist = Cookies.get('checklist');
-    if (savedChecklist) {
-      setChecklist(JSON.parse(savedChecklist));
-    }
-  }, []);
-
-  // Salvar tarefas nos cookies
-  useEffect(() => {
-    Cookies.set('checklist', JSON.stringify(checklist), { expires: 7 });
-  }, [checklist]);
 
   const handleStart = () => setIsRunning(true);
   const handlePause = () => setIsRunning(false);
@@ -66,9 +52,9 @@ export default function Timer() {
 
   const handleAddTask = () => {
     if (newTask.trim() !== '') {
-      setChecklist([
+      setChecklist(prevChecklist => [
         { text: newTask, done: false, animating: false },
-        ...checklist,
+        ...prevChecklist,
       ]);
       setNewTask('');
     }
