@@ -1,0 +1,133 @@
+.timerContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Poppins', sans-serif;
+}
+
+.clock {
+  margin: 2rem;
+  padding: 2rem;
+}
+
+.clock span {
+  font-size: 8.75em;
+  font-weight: 250;
+  font-style: normal;
+}
+
+.buttons {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 5rem;
+}
+
+.btnTimer {
+  width: 293px;
+  height: 71px;
+  border-radius: 20px;
+  border: none;
+  font-size: 2em;
+  cursor: pointer;
+  transition: transform 0.5s ease, background 0.5s ease, color 0.5s ease;
+}
+
+.btnTimer:hover {
+  transform: scale(1.05);
+}
+
+.btnStart {
+  background-color: #316330;
+}
+
+.btnPause {
+  background-color: #3f2fff;
+}
+
+.btnStop {
+  background-color: #ff3939;
+}
+
+.btnStart:hover {
+  background-color: #273b26;
+}
+
+.btnPause:hover {
+  background-color: #352bad;
+}
+
+.btnStop:hover {
+  background-color: #af2d2d;
+}
+
+.addTask {
+  margin-top: 1rem;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.addTask input {
+  width: 200px;
+  padding: 0.5rem;
+  font-size: 1em;
+}
+
+.addTask button {
+  padding: 0.5rem 1rem;
+  font-size: 1em;
+  background-color: #316330;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.addTask button:hover {
+  background-color: #273b26;
+}
+
+/* Estilo da lista de tarefas */
+.checklist ul {
+  list-style-type: none;
+  padding: 0;
+  width: 100%;
+  max-width: 600px;
+}
+
+.checklist li {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem;
+  border-bottom: 1px solid #666;
+  font-size: 1em;
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+
+.checklist li input[type='checkbox'] {
+  margin-right: 0.5rem;
+  cursor: pointer;
+}
+
+.checklist li.done {
+  text-decoration: line-through;
+  background-color: green;
+}
+
+.checklist li.animating {
+  animation: disappear 1s forwards;
+}
+
+@keyframes disappear {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+}

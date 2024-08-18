@@ -1,15 +1,8 @@
-import styles from './App.module.css';
+import './App.css';
+import Timer from './Components/Timer/Timer';
 
 function App() {
-  return (
-    <div className={styles.timerContent}>
-      <div className={styles.clock}>
-        <span>00:00:00:00</span>
-      </div>
-      <div className={styles.buttons}></div>
-      <div className={styles.checklist}></div>
-    </div>
-  );
+  return <Timer />;
 }
 
 export default App;
