@@ -2,12 +2,25 @@ import React, { useState, useEffect } from 'react';
 import styles from './Timer.module.css';
 
 export default function Timer() {
-  const [time, setTime] = useState(0);
-  const [isRunning, setIsRunning] = useState(false);
-  const [checklist, setChecklist] = useState([]);
+  const [time, setTime] = useState(() => {
+    const savedTime = localStorage.getItem('time');
+    return savedTime ? parseInt(savedTime, 10) : 0;
+  });
+  const [isRunning, setIsRunning] = useState(() => {
+    const savedIsRunning = localStorage.getItem('isRunning');
+    return savedIsRunning ? JSON.parse(savedIsRunning) : false;
+  });
+  const [checklist, setChecklist] = useState(() => {
+    const savedChecklist = localStorage.getItem('checklist');
+    return savedChecklist ? JSON.parse(savedChecklist) : [];
+  });
   const [newTask, setNewTask] = useState('');
 
   useEffect(() => {
+    localStorage.setItem('time', time);
+    localStorage.setItem('isRunning', JSON.stringify(isRunning));
+    localStorage.setItem('checklist', JSON.stringify(checklist));
+
     let timer;
     if (isRunning) {
       timer = setInterval(() => {
@@ -17,7 +30,7 @@ export default function Timer() {
       clearInterval(timer);
     }
     return () => clearInterval(timer);
-  }, [isRunning, time]);
+  }, [isRunning, time, checklist]);
 
   const handleStart = () => setIsRunning(true);
   const handlePause = () => setIsRunning(false);
@@ -47,7 +60,7 @@ export default function Timer() {
     // Remove a tarefa da lista após a animação
     setTimeout(() => {
       setChecklist(prev => prev.filter((_, i) => i !== index));
-    }, 1000); // Tempo da animação
+    }, 1000);
   };
 
   const handleAddTask = () => {
@@ -57,6 +70,12 @@ export default function Timer() {
         ...prevChecklist,
       ]);
       setNewTask('');
+    }
+  };
+
+  const handleKeyDown = e => {
+    if (e.key === 'Enter') {
+      handleAddTask();
     }
   };
 
@@ -91,6 +110,7 @@ export default function Timer() {
             type='text'
             value={newTask}
             onChange={e => setNewTask(e.target.value)}
+            onKeyDown={handleKeyDown}
             placeholder='Adicionar nova tarefa'
           />
           <button onClick={handleAddTask}>Adicionar</button>
